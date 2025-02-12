@@ -23,6 +23,8 @@ User.init({
     
     otp: {
       type: DataTypes.STRING,
+      allownull: true,
+      defaultValue: null,
     }
 },
    {
@@ -39,7 +41,7 @@ sequelize.sync()
       .then(() => console.log('User table created successfully'))
       .catch((err) => console.error('Error creating table:', err));
 
-
+module.exports = User;
 
 
 
