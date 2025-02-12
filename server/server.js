@@ -1,11 +1,11 @@
 //import dependencies
 
 const sequelize = require('./config/database');
-require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const nodemailer = require('nodemailer');
 const randomize = require('randomatic');
+const userRouter = require('./routes/userRoutes');
 const app = express();
 
 const PORT = 3001;
@@ -25,10 +25,29 @@ app.use(express.json());
 })();
 
 
+app.use('/users', userRouter);
 
-// REST APIs
+// send otp to user email
+async function sendOtp(email, otp){
+    try{
+        const transporter = nodemailer.createTransporter({
+            service: 'gmail',
+            auth: {
+                user: '',
+                pass: 
+            }
+        })
+    }
+}
 
-// function to send otp to user email
+
+
+
+
+
+
+
+
 
 
 // start server
