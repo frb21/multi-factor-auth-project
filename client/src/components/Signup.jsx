@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 const Signup = () => {
   // STATE AND UPDATER FUNCTIONS
@@ -7,6 +8,7 @@ const Signup = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+
 
 
   // handle submit function
@@ -84,6 +86,8 @@ const Signup = () => {
         />
         <button type="submit">Register</button>
       </form>
+
+      <p>Already have an acoount? Click <Link to="/login">here</Link> to login.</p>
     </div> 
   );
 };
