@@ -1,12 +1,13 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-
+import { useNavigate } from 'react-router-dom'; 
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -42,6 +43,8 @@ const Login = () => {
         setSuccess("Login successful");
         setError(null);
         console.log(success);
+        alert("OTP Sent!");
+        navigate('/verify-login', {state: {email}});
       }
       else{
         setError(data.message || 'Error has occurred');
