@@ -1,22 +1,20 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 
-const Signup = () => {
-  // STATE AND UPDATER FUNCTIONS
+
+const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
 
-
-  // handle submit function
   const handleSubmit = async (e) => {
     e.preventDefault();
     if(!email || !password){
       setError('Both fields are required');
       return;
     }
-    
+
     if(!/\S+@\S+\.\S+/.test(email)){
       setError('Please enter a valid email address.');
       return;
@@ -27,70 +25,69 @@ const Signup = () => {
 
     const userData = {
       email: email,
-      password: password,
+      password: password
     };
-    
+
     try{
-      const response = await fetch('http://localhost:3001/users/add', {
+      const response = await fetch('http://localhost:3001/auth/login', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type' : 'application/json',
         },
         body: JSON.stringify(userData),
       });
-
+      
       const data = await response.json();
       if(response.ok){
-        setSuccess("Signup successful!");
+        setSuccess("Login successful");
         setError(null);
         console.log(success);
       }
       else{
-        setError(data.message || "An error occured");
+        setError(data.message || 'Error has occurred');
         setSuccess(null);
+        console.log(error);
       }
     }
     catch(error){
-      setError("There was a problem.");
+      setError(error);
+      console.log("There was a problem.");
       setSuccess(null);
     }
   };
 
   useEffect(() => {
     console.log("Error state: ", error);
-
   }, [error]);
 
   return(
     <div>
-      <h1 className="text-3xl font-bold underline">Signup:</h1>
       <form onSubmit={handleSubmit}>
+        <h1>Login</h1>
         <label htmlFor="email">Email:</label>
         <input 
-          type="email"
           id="email"
+          type="email"
           placeholder="Enter email."
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
-        
+
         <label htmlFor="password">Password:</label>
         <input 
-          type="password"
           id="password"
-          placeholder="Create password."
+          type="password"
+          placeholder="Enter password."
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button type="submit">Register</button>
+      <button type="submit">Login</button>
       </form>
-    </div> 
+    </div>
   );
 };
 
-export default Signup;
-
-
+export default Login;
 
 
 

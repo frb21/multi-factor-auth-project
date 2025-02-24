@@ -6,13 +6,14 @@ const sequelize = new Sequelize('MFADB', 'francis', 'francisrey123', {
   dialect: process.env.DB_DIALECT || 'mysql',
 });
 
-class User extends Model {}
 
-User.init({
+const User = sequelize.define(
+  'User',
+  {
     // model attributes
     email: {
       type: DataTypes.STRING,
-      unique: true,
+      unique: false,
       allowNull: false,
     },
 
