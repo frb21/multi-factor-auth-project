@@ -43,6 +43,7 @@ const VerifyLogin = () => {
         //setSuccess("Login successful");
         setError(null);
         console.log("Login successful");
+        alert("Login successful!");
       }
       else{
         setError(data.message || 'Error has occurred');
